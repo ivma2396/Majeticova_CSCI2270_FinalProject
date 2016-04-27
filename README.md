@@ -13,7 +13,7 @@ How to Run:
 
 In order to run this program you have to download the document with the times in it. This is included in the repository as 
 Times.txt it has been slightly altered so that a more simple program can read it. This txt file is the only thing that sould stop the
-program from running. Also be careful as the inputs are case sensitive so for names "nicole" will not work, you must use "Nicole". As soon
+program from running. The program takes in the file name as a project arguement so be sure to add that. Also be careful as the inputs are case sensitive so for names "nicole" will not work, you must use "Nicole". As soon
 as the program runs it gives you a main menu of options, options 1,4,5 and 9 require no input, they simply spit out data. For option 2
 it will prompt you for a number, this number is the number of the place you want to display, if you want to see the third place winner input 
 the number 3, it only goes to 99th place so keep your number between 1 and 100. Option 3 will ask you for a name, first it will ask if you
