@@ -15,7 +15,39 @@ int choice=0;
 while(choice!=9){
     T.MainMenu();
     cin>>choice;
-    if(choice == 1)
+    switch (choice)
+    {
+    case 1:
+        T.PrintList();
+        break;
+    case 2:
+        T.PrintPlace();
+        break;
+    case 3:
+        T.FindSwimmer();
+        break;
+    case 4:
+        T.FindTies();
+        break;
+    case 5:
+        T.FindAvg();
+        break;
+    case 6:
+        T.FindImprovement();
+        break;
+    case 7:
+        T.PrintCertainPlace();
+        break;
+    case 8:
+        T.PrintCertainTimes();
+        break;
+    case 9:
+        cout<<"Thank you for visiting"<<endl;
+        break;
+    default:
+        cout<<"Please enter valid choice"<<endl;
+    }
+    /*if(choice == 1)
         T.PrintList();
     if(choice == 2)
         T.PrintPlace();
@@ -30,9 +62,7 @@ while(choice!=9){
     if(choice == 7)
         T.PrintCertainPlace();
     if(choice == 8)
-        T.PrintCertainTimes();
+        T.PrintCertainTimes();*/
 }
-cout<<"Thank you for visiting"<<endl;
-
-    return 0;
+return 0;
 }
