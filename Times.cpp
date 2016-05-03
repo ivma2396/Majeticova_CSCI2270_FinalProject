@@ -31,13 +31,32 @@ void Times::MainMenu(){
 }
 
 void Times::PrintCertainPlace(){
-    cout<<"What places should I print out?"<<endl;
+    cout<<"What places should I print out (between 1 and 99)?"<<endl; //Specifies what places are valid
     int b;
     int e;
     cout<<"Starting place: ";
     cin>>b;
+    while((b<1)||(b>99)) //Only allows for valid input
+    {
+        cout<<"Please enter number between 1 and 99"<<endl;
+        cout<<"Starting place: ";
+        cin>>b;
+    }
     cout<<"Ending place: ";
     cin>>e;
+    while((e<1)||(e>99)||(e<b)) //Only allows for input which is valid and is greater than the starting time
+    {
+        if((e<1)||(e>99))
+        {
+            cout<<"Please enter number between 1 and 100"<<endl;
+        }
+        else if (e<b)
+        {
+            cout<<"Please enter number greater than or equal to "<<b<<endl;
+        }
+        cout<<"Ending place: ";
+        cin>>e;
+    }
     Place *tmp = head;
     while(tmp->next!=NULL){
         if(tmp->place >=b and tmp->place<=e){
@@ -50,10 +69,31 @@ void Times::PrintCertainPlace(){
 void Times::PrintCertainTimes(){
     double b;
     double e;
+    cout<<"Please Enter Times Between 29.87 s and 37 s Separated by At least .01 s"<<endl;
     cout<<"Starting time: ";
     cin>>b;
+    while((b< 29.87)||(b>=37))
+    {
+    cout<<"Please Enter Times Between 29.87 s and 36.99 s (for Starting Time) Separated by At least .01 s"<<endl;
+    cout<<"Starting time: ";
+    cin>>b;
+    }
     cout<<"Ending time: ";
     cin>>e;
+    while((e<29.87)||(e>37)||(e<=b))
+    {
+        if((e<29.87)||(e>37))
+        {
+            cout<<"Please Enter Times Between 29.87 s and 37 s Separated by At least .01 s"<<endl;
+            cout<<"Starting time: ";
+            cin>>e;
+        }
+        else if((e<=b))
+        {
+            cout<<"Please enter a Time Greater Than "<<b<<" By At Least 0.01 s"<<endl;
+            cin>>e;
+        }
+    }
     Place *tmp = head;
     bool print = false;
     while(tmp->next!=NULL){
@@ -69,11 +109,17 @@ void Times::PrintCertainTimes(){
 }
 
 void Times::FindImprovement(){
+    bool foundSwimmer=false; //Added to allow for error output if swimmer not in list
     string fl;
     string name;
     cout<<"Search by (f)irst name of (l)ast name?"<<endl;
     cin>>fl;
-    cout<<"Which swimmer would you like to find the improvement of?"<<endl;
+    while((fl!="f")&&(fl!="l"))
+    {
+        cout<<"Please enter \'f\' for first or \'l\' for last"<<endl;
+        cin>>fl;
+    }
+    cout<<"Which swimmer would you like to find the improvement of? (please capitalize first letter)"<<endl;
     cin>>name;
     Place *tmp = head;
     Place *found = NULL;
@@ -81,6 +127,7 @@ void Times::FindImprovement(){
     while(tmp->next!=NULL){
         if(fl=="f"){
             if(tmp->first==name){
+                foundSwimmer=true; //Swimmer found in list
                 improvement = tmp->PTime - tmp->FTime;
                 if(improvement <0){
                     float improvement2 = -1*improvement;
@@ -92,6 +139,7 @@ void Times::FindImprovement(){
         }
         else{
             if(tmp->last==name){
+                foundSwimmer=true;
                 improvement = tmp->PTime - tmp->FTime;
                 if(improvement <0){
                     float improvement2 = -1*improvement;
@@ -103,7 +151,10 @@ void Times::FindImprovement(){
             }
         tmp= tmp->next;
     }
-
+    if(foundSwimmer==false) //If the swimmer is not in the list
+    {
+        cout<<"Swimmer not found"<<endl;
+    }
 }
 
 
@@ -175,8 +226,16 @@ void Times::PrintList(){
 
 void Times::PrintPlace(){
     int placeV;
-    cout<<"What place should I print out?"<<endl;
+    cout<<"What place should I print out (between 1 and 99)?"<<endl;
+    cout<<"Enter place: ";
     cin>>placeV;
+    while((placeV<0)||(placeV>99))
+    {
+        cout<<"Please enter a number between 1 and 99"<<endl;
+        cout<<"What place should I print out (between 1 and 99)?"<<endl;
+        cout<<"Enter place: ";
+        cin>>placeV;
+    }
     Place *tmp = head;
     while(tmp->next!=NULL){
         if(tmp->place == placeV){
@@ -186,16 +245,23 @@ void Times::PrintPlace(){
     }
 }
 void Times::FindSwimmer(){
+    bool foundSwimmer=false; //Variable to determine if swimmer is in list
     string fl;
     string name;
     cout<<"Search by (f)irst name of (l)ast name?"<<endl;
     cin>>fl;
-    cout<<"Which swimmer would you like to find?"<<endl;
+    while((fl!="f")&&(fl!="l"))
+    {
+        cout<<"Please enter \'f\' for first or \'l\' for last"<<endl;
+        cin>>fl;
+    }
+    cout<<"Which swimmer would you like to find? (please capitalize first letter)"<<endl;
     cin>>name;
     Place *tmp = head;
     if(fl == "f"){
         while(tmp->next!=NULL){
             if(tmp->first==name){
+                foundSwimmer=true;
                 cout<<tmp->place<<": "<<tmp->first<<" "<<tmp->last<<" : "<<tmp->FTime<<endl;
             }
             tmp = tmp->next;
@@ -204,10 +270,15 @@ void Times::FindSwimmer(){
     if(fl == "l"){
         while(tmp->next!=NULL){
             if(tmp->last==name){
+                foundSwimmer=true;
                 cout<<tmp->place<<": "<<tmp->first<<" "<<tmp->last<<" : "<<tmp->FTime<<endl;
             }
             tmp = tmp->next;
         }
+    }
+    if(foundSwimmer==false)
+    {
+        cout<<"Swimmer not found"<<endl;
     }
 }
 
